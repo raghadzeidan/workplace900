@@ -6,13 +6,6 @@ in order to install the requirements, run the following command inside the main 
 $ . install.sh
 ```
 
-Run installation script and activate virtual enviroment
-```
-$ .  ./scripts/install.sh
-...
-$ source .env/bin/activate
-```
-
 Run tests to make sure everything is working ok
 ```
 $ pytest tests/
