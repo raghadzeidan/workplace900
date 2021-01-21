@@ -17,21 +17,25 @@ In order to run the parking lot server with the default parameters, run the foll
 $ python -m pl_manager.server run
 ```
 
-In order to create the app with default parameters, use ```create_app()``` function inside ```server.py```
+In order to create the app with default parameters, use ```create_app()``` function inside ```server.py```. \
 In order to run the app after it was created, use ```run_server(app,host,port)```
 ## Server Parameters
 ### run_server() parameters
-*app* parameter in which app to run, most likely the app created by create_app() function
+*app* parameter in which app to run, most likely the app created by create_app() function. \
 *host* default parameter being **localhost**. \
 *port* default parameter being default flask port **5000**. 
 ### create_app() parameters
-create_app() functions takes takes 4 parameters.
-*parking_lot_cls* defines the parking-lot class the app is initiated with. This defines the class that indicates the state of the parking lot we are creating an app for. For our assignment, this state is simply just an integer indicating the number of slots in the parking lot. the create_app function then creates an instance of this class, that takes into account the parking lot state (in our case, the create_app function just retreives the SLOTS_NUMBER environment variable and initiates the parking lot via it.) \
-The default value for the *parking_lot_cls* parameter is ```SimpleParkingLot``` class defined in ```pl_manager.py``` that expected a single number_of_slots integer to initiate it.
-*backend_driver_cls* defines the driver used in order to save/retreive data from our database. In the assignment case, the driver I implemented was ```SimpleJsonDriver``` inside ```json_driver.py```. it writes to "db.json" file in the db directory, a json-format of the databse, including a "free" key that is mapped to the number of free slots in our database, as well as "slots" key that is mapped to a slot-number,car-number set of pairs (dict).
+create_app() functions takes takes 4 parameters. 
+1) *parking_lot_cls*. \
+defines the parking-lot class the app is initiated with. This defines the class that indicates the state of the parking lot we are creating an app for. For our assignment, this state is simply just an integer indicating the number of slots in the parking lot. the create_app function then creates an instance of this class, that takes into account the parking lot state (in our case, the create_app function just retreives the SLOTS_NUMBER environment variable and initiates the parking lot via it.).
+The default value for the *parking_lot_cls* parameter is ```SimpleParkingLot``` class defined in ```pl_manager.py``` that expected a single number_of_slots integer to initiate it. 
+2) *backend_driver_cls*. \
+defines the driver used in order to save/retreive data from our database. In the assignment case, the driver I implemented was ```SimpleJsonDriver``` inside ```json_driver.py```. it writes to "db.json" file in the db directory, a json-format of the databse, including a "free" key that is mapped to the number of free slots in our database, as well as "slots" key that is mapped to a slot-number,car-number set of pairs (dict).
 
-*db_path* is the path to the database that it used by our backened_driver, **if it uses one**. the default value of it, **for our assignment purposes** is the path to the "db.json" file that holds the ```SimpleJsonDriver``` database.
-*debug* indicates wether or not we're creating the app in debug-mode or not. debug-mode includes more endopints that are utilized by our tests. default value is **False**
+3) *db_path* \
+is the path to the database that it used by our backened_driver, **if it uses one**. the default value of it, **for our assignment purposes** is the path to the "db.json" file that holds the ```SimpleJsonDriver``` database. 
+4) *debug* \
+indicates wether or not we're creating the app in debug-mode or not. debug-mode includes more endopints that are utilized by our tests. default value is **False**
 
 ## Breif Server/Assignment Explanation
 The solution and the parameters for the create_app() function, define 3/4 SW "layers". \
@@ -64,18 +68,3 @@ the server defines the app and defines the endpoints it expects. \
         return value for the above requests will be ```{"slot-number":0, "car-number":1234567}``` Json format.
         
         
-## Quickstart explanation
-        brief explanation: the server handles server-related tasks, such as legality of the post or get requests recieved. in addition to that, the app can be             created in "debug" mode, in which two new debug endpoints are introduced, which the tests inside the test folder make use of them.
-        the server then calls the manager to handle the requests after checking everything is OK, HTTP-Request-wise, and possibly other factos in the future.
-
-# Quickstart Explanation
-  The final project includes a client, which streams cognition snapshots to a server, 
-  which then publishes them to a message queue, where multiple parsers read the snapshot,
-  parse various parts of it, and publish the parsed results, which are then saved to a database.
-  The result in the database is then reflected by an API, CLI and GUI.
-  
-After the snapshot has been updating by the client, A Graphical User Interface (GUI) is available on http://localhost:8080, as well as a Command Line Interface (CLI) by querying like such:
-# Full Documentation of Functions and Modules
-View the full documenation of modules and functions [here](https://cortexx.readthedocs.io/en/latest/).
-  
-  
